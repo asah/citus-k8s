@@ -1,5 +1,18 @@
 #!/bin/bash
 
+wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-230.0.0-linux-x86_64.tar.gz
+tar zxf google-cloud-sdk-230.0.0-linux-x86_64.tar.gz google-cloud-sdk
+./google-cloud-sdk/install.sh -q
+source ~/.bashrc
+gcloud components install kubectl -q
+gcloud components update
+
+# interactive login to your google account...
+gcloud auth login
+gcloud config set project mgh-neurology-poc-01
+gcloud config set compute/zone us-east1-c
+gcloud container clusters get-credentials citus-test-asah-01
+
 export WORKERS=7
 kubectl delete deployment.apps/citus-master service/citus-master service/citus-workers; kubectl delete sts citus-worker; kubectl delete pvc citus-master-pvc; echo "waiting for termination..."; sleep 30; kubectl get all
 

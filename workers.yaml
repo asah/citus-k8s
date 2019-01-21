@@ -20,7 +20,7 @@ spec:
     matchLabels:
       app: citus-workers
   serviceName: citus-workers
-  replicas: 3
+  replicas: 7
   template:
     metadata:
       labels:
