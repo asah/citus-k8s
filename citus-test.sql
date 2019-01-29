@@ -43,8 +43,8 @@ CREATE TABLE dTowns (
   name TEXT, -- not unique
   department VARCHAR(4)
 );
-\copy dtowns from 'towns.csv';
 select create_distributed_table('dtowns', 'id');
+\copy dtowns from 'towns.csv';
 
 -- citus table: rtowns -- reference table (replicated on all nodes)
 DROP TABLE IF EXISTS rtowns;
